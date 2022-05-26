@@ -1,0 +1,8 @@
+# yml 모든 스프링 부트의 설정을 할 수 있다.
+# h2 데이터 베이스
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password :
