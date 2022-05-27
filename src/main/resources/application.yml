@@ -1,8 +1,41 @@
 # yml 모든 스프링 부트의 설정을 할 수 있다.
+server:
+  port: 8000
+  servlet:
+    context-path: /blog
+  
 # h2 데이터 베이스
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:tcp://localhost/~/test
     username: sa
     password :
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
+  # jsp 파일 수정후 실시간 반영  
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false
+    
