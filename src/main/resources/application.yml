@@ -28,7 +28,8 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
     # 프로젝트를 시작할 때마다 테이블을 create 한다. -> 기존에 user 테이블이 있어도 삭제하고 실행할 때 마다 새로 만든다. 나중에 update로 바꿔야한다.
-      ddl-auto: create
+#      ddl-auto: create
+      ddl-auto: update
 #    properties:
 #      hibernate.hbm2ddl.auto: create
       naming:
