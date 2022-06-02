@@ -3,11 +3,15 @@ package com.cos.blog.test;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,14 +44,41 @@ public class DummyControllerTest {
 	@Autowired // @Autowired 붙여주면 DummyControllerTest를 메모리에 띄워줄때 UserRepository도 같이 메모리에 띄워준다.
 	private UserRepository userRepository; // @Autowired는 UserRepository타입으로 스프링이 관리하는 객체를 쏙 넣어주는 것
 
+	@DeleteMapping("dummy/user/{id}")
+	public String delete(@PathVariable int id) {
+		try {
+			userRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+		}
+
+		return "삭제 되었습니다. id : " + id;
+	}
+
+	// save 함수는 id를 전달하지 않으면 insert를 해주고
+	// save 함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update 해주고
+	// save 함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 해요.
 	// email, password
+	// http://localhost:8000/blog/dummy/user1
+	@Transactional // 메서드 종료 시 자동 commit이 된다.
 	@PutMapping("/dummy/user/{id}")
 	public User1 updateUser(@PathVariable int id, @RequestBody User1 requestUser) {
+		// json 데이터를 요청 => Java Object(MessageConverter의 Jackson 라이브러리가 변환해서 받아줘요.)
 		System.out.println("id : " + id);
 		System.out.println("password : " + requestUser.getPassword());
 		System.out.println("email : " + requestUser.getEmail());
 
-		return null;
+		// id로 실제 데이터베이스에 있는 내용을 담는다. findById(id) id를 확인하고.
+		User1 user = userRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("수정에 실패하였습니다.");
+		});
+		user.setPassword(requestUser.getPassword()); // User1 객체의 내용을 바꾼다.
+		user.setEmail(requestUser.getEmail());
+
+		// userRepository.save(user); // 변경된 Object를 넣으면 쏙 변경된다.
+
+		// 더티 체킹
+		return user;
 	}
 
 	// http://localhost:8000/blog/dummy/user
