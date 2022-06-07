@@ -11,11 +11,16 @@ import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User1;
 import com.cos.blog.service.UserService;
 
+
 @RestController // data 만 리턴해줄 것
 public class UserApiController {
 
 	@Autowired // DI
 	private UserService userService;
+
+// 전통적인 로그인 방법
+//	@Autowired
+//	private HttpSession session; // 세션을 매개변수로 받아도 되고 DI 해도 된다.
 
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User1 user) { // username, password, email
@@ -27,4 +32,18 @@ public class UserApiController {
 //		return new ResponseDto<Integer>(HttpStatus.OK.value(), result); // 자바오브젝트를 JSON으로 변환해서 리턴(Jackson)
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+
+// 전통적인 로그인 방식
+//	@PostMapping("/api/user/login")
+////	public ResponseDto<Integer> login(@RequestBody User1 user, HttpSession session) {
+//	public ResponseDto<Integer> login(@RequestBody User1 user) {
+//		System.out.println("UserApiController : login 호출됨");
+//
+//		User1 principal = userService.로그인(user); // principal(접근주체)
+//		if (principal != null) {
+//			session.setAttribute("principal", principal);
+//		}
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+//	}
+
 }

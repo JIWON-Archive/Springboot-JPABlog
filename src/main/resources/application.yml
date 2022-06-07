@@ -2,7 +2,7 @@
 server:
   port: 8000
   servlet:
-    context-path: /blog
+    context-path: /
   
 # h2 데이터 베이스
 spring:
