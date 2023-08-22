@@ -30,7 +30,7 @@ public class Reply { // 답변 테이블
 	@Column(nullable = false, length = 200)
 	private String content;
 
-	@ManyToOne // 하나의 게시글에는 여러개의 답변이 있을 수 있다.여러개의 답변은 하나의 게시글에 존재할 수 있다.
+	@ManyToOne // 하나의 게시글에는 여러개의 답변이 있을 수 있다. 여러개의 답변은 하나의 게시글에 존재할 수 있다.
 	@JoinColumn(name = "boardId")
 	private Board board;
 

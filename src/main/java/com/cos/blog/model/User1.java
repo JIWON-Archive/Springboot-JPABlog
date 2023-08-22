@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 // @DynamicInsert // insert시 null인 값을 제외시켜준다.
 public class User1 { // H2 DB에서는 USER 테이블 생성X(예약어라서 에러남)
 	@Id // Primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. 오라클 :시퀀스, MySQL : auto increment 
 	private int id; // 시퀀스, auto_increment
 
 	@Column(nullable = false, length = 30, unique = true)
