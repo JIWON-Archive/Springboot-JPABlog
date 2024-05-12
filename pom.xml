@@ -102,9 +102,15 @@
 			<artifactId>jstl-api</artifactId>
 			<version>1.2-rev-1</version>
 		</dependency>
-		
- 		
- 		<!-- JAVA11 에러 해결-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <!-- JAVA11 에러 해결-->
  		<!-- 
 	  	<dependency>
 	    	<groupId>javax.xml.bind</groupId>
