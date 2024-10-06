@@ -38,7 +38,7 @@ public class Board {
 	@Lob // 대용량 데이터
 	private String content; // 섬머노트 라이브러리 <html> 태그가 섞여서 디자인 됨. 크기가 엄청 커짐
 
-	@ColumnDefault("0")
+//	@ColumnDefault("0")
 	private int count; // 조회수
 	
 	// fetch = FetchType.EAGER 기본전략 Board 테이블을 SELECT 하면 User 정보는 바로 조인해서 가져온다.

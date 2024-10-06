@@ -29,8 +29,8 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
     # 프로젝트를 시작할 때마다 테이블을 create 한다. -> 기존에 user 테이블이 있어도 삭제하고 실행할 때 마다 새로 만든다. 나중에 update로 바꿔야한다.
-    #  ddl-auto: create
-      ddl-auto: update
+      ddl-auto: create
+    #  ddl-auto: update
 #    properties:
 #      hibernate.hbm2ddl.auto: create
       naming:
@@ -38,7 +38,7 @@ spring:
       # SpringPhysicalNamingStrategyStandardImpl는 변수명 _로 만들어준다. myEmail -> my_email
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       # false JPA가 사용하는 기본 넘버링 전략을 따라가지 않는다. true -> 기본 넘버링 전략을 따라간다.
-      use-new-id-generator-mappings: false 
+      use-new-id-geneFrator-mappings: false
     # 콘솔창에 sql 문 보이게 하기
     show-sql: true
     properties:
