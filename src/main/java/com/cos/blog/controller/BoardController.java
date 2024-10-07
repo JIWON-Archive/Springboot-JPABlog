@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class BoardController {
@@ -26,6 +27,11 @@ public class BoardController {
         model.addAttribute("boards", boardService.글목록(pageable));
         // index라는 페이지로  boards가 날아간다.
         return "index"; // viewResolver가 작동!! model의 정보를 들고 간다. model은 request 정보
+    }
+    @GetMapping("/board/{id}")
+    public String findById(@PathVariable int id, Model model) {
+        model.addAttribute("board",boardService.글상세보기(id));
+        return "board/detail";
     }
 
     // USER 권한이 필요

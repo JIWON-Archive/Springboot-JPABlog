@@ -19,16 +19,23 @@ import java.util.List;
 @Service
 public class BoardService {
 
-	@Autowired // 객체가 쏙들어온다.
-	private BoardRepository boardRepository;
-	
-	@Transactional
-	public void 글쓰기(Board board, User1 user) {	// title, content
-		board.setCount(0);
-		boardRepository.save(board);
-	}
+    @Autowired // 객체가 쏙들어온다.
+    private BoardRepository boardRepository;
 
-	public Page<Board> 글목록(Pageable pageable) {
-		return boardRepository.findAll(pageable);
-	}
+    @Transactional
+    public void 글쓰기(Board board, User1 user) {    // title, content
+        board.setCount(0);
+        boardRepository.save(board);
+    }
+
+    public Page<Board> 글목록(Pageable pageable) {
+        return boardRepository.findAll(pageable);
+    }
+
+    public Board 글상세보기(int id) {
+        return boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다.");
+        });
+
+    }
 }
