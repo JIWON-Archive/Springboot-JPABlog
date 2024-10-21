@@ -37,7 +37,7 @@ public class BoardController {
     // model은 해당 data를 가지고 view까지 이동한다.
     public String updateForm(@PathVariable int id, Model model) {
         model.addAttribute("board", boardService.글상세보기(id));
-        return "board.updateForm";
+        return "board/updateForm";
     }
 
     // USER 권한이 필요
