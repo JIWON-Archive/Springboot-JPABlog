@@ -5,6 +5,9 @@ let index = {
         $("#btn-save").on("click", () => {
             this.save(); // *this는 같음 function사용하면 this가 window객체를 가르킴
         });
+        $("#btn-delete").on("click", () => {
+            this.deleteById(); // delete는 예약어
+        });
 
 //		$("#btn-login").on("click", () => {
 //			this.login();
@@ -28,6 +31,23 @@ let index = {
         }).done(function (resp) {
             // 응답의 결과가 정상이면 done 실행
             alert("글쓰기가 완료되었습니다.");
+            alert(resp);
+            console.log(resp);
+            location.href = "/";
+        }).fail(function (error) {
+            // 실패하면 fail 실행
+            alert(JSON.stringify(error));
+        });
+    },
+    deleteById: function () {
+        var id = $("#id").text();
+        $.ajax({
+            type: "DELETE",
+            url: "/api/board/"+ id,
+            dataType: "json"
+        }).done(function (resp) {
+            // 응답의 결과가 정상이면 done 실행
+            alert("삭제가 완료되었습니다.");
             alert(resp);
             console.log(resp);
             location.href = "/";

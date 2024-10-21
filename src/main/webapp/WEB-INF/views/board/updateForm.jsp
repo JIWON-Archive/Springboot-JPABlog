@@ -5,11 +5,11 @@
 <div class="container">
     <form>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter title" id="title">
+            <input value="${board.title}" type="text" class="form-control" placeholder="Enter title" id="title">
         </div>
 
         <div class="form-group">
-            <textarea class="form-control summernote" rows="5" id="content"></textarea>
+            <textarea class="form-control summernote" rows="5" id="content">${board.content}</textarea>
         </div>
     </form>
     <button id="btn-save" class="btn btn-primary">글쓰기 완료</button>
