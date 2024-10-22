@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,11 @@ public class UserApiController {
 //		return new ResponseDto<Integer>(HttpStatus.OK.value(), result); // 자바오브젝트를 JSON으로 변환해서 리턴(Jackson)
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
-
+	@PutMapping("/user")
+	public ResponseDto<Integer> update(@RequestBody User1 user) {	// RequestBody가 없으면 json 데이터를 받을 수 없다. -> key=value, x-www-form-urlencoded
+		userService.회원수정(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
 // 전통적인 로그인 방식
 //	@PostMapping("/api/user/login")
 ////	public ResponseDto<Integer> login(@RequestBody User1 user, HttpSession session) {
