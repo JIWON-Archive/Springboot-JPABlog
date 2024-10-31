@@ -23,18 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PrincipalDetailService principalDetailService;
 
+    @Bean   // 빈으로 등록하면 어디어서든 DI해서 쓸 수 있다.
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
 
-	@Bean // IoC가 되요 함수가 리턴하는 값을 스프링이 관리한다.
+	@Bean // IoC 함수가 리턴하는 값을 스프링이 관리한다.
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
 
 	// 시큐리티가 대신 로그인해주는데 password를 가로채기 하는 데
-	// 해당 password가 뭘로 해쉬가 되어 회원가입이 되는 지 알아야
+	// 해당 password가 뭘로 해시가 되어 회원가입이 되는 지 알아야
 	// 같은 해쉬로 암호화해서 DB에 있는 해쉬랑 비교할 수 있음.
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
